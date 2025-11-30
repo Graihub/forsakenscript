@@ -24,7 +24,6 @@ local Tabs = {
     Dev = Window:AddTab({ Title = "About", Icon = "info" }),
     Farm = Window:AddTab({ Title = "Farm", Icon = "box" }),
     Main = Window:AddTab({ Title = "Main", Icon = "home" }),
-    Event = Window:AddTab({ Title = "Event", Icon = "bell" }),
     Custom = Window:AddTab({ Title = "Custom", Icon = "brush" }),
     Player = Window:AddTab({ Title = "Player", Icon = "user" }),
     Visual = Window:AddTab({ Title = "Visual", Icon = "eye" }),
@@ -322,7 +321,7 @@ Button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 Button.BackgroundTransparency = 0.3
 Button.BorderSizePixel = 0
 Button.ClipsDescendants = true
-Button.Image = "rbxassetid://78916242543205" -- Thay icon nếu muốn
+Button.Image = "rbxassetid://128065608232403" -- Thay icon nếu muốn
 Button.ScaleType = Enum.ScaleType.Fit
 Button.Active = true
 Button.ZIndex = 1000
@@ -1869,17 +1868,6 @@ local function getHumanoidAndHRP()
     return hum, hrp
 end
 
-Tabs.Event:AddButton({
-    Title = "TP to Shop",
-    Description = "Teleport đến khu Shop",
-    Callback = function()
-        local _, hrp = getHumanoidAndHRP()
-        if hrp then
-            hrp.CFrame = CFrame.new(-3540.36, -392.73, 231.53)
-        end
-    end,
-})
-
 local allowedModels = {
     ["dumsek"]=true, ["toon dusek"]=true, ["dusek"]=true,
     ["umdum"]=true, ["doothsek"]=true
@@ -1934,13 +1922,6 @@ task.spawn(function()
             end
         end
     end
-end)
-
-Tabs.Event:AddToggle("ESPSukkarsToggle", {
-    Title = "ESP Sukkars",
-    Default = false,
-}):OnChanged(function(state)
-    _G.ESPManager:SetEnabled("Sukkars", state)
 end)
 
 local TargetNames = {"dumsek","toon dusek","umdum","dusek","doothsek"}
@@ -2049,19 +2030,6 @@ task.spawn(function()
         end
     end
 end)
-
-Tabs.Event:AddToggle("AutoFarmSukkars", {
-    Title = "Auto Farm Sukkars",
-    Default = false,
-    Callback = function(state)
-        autoTeleport = state
-        if not state then
-            currentTarget = nil
-            table.clear(visitedModels)
-        end
-    end,
-})
-
 
 -- Tabs.Custom
 
