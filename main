@@ -16,7 +16,7 @@ local Window = Fluent:CreateWindow({
     UserInfo = false,
     UserInfoTop = false,
     UserInfoTitle = game:GetService("Players").LocalPlayer.DisplayName,
-    UserInfoSubtitle = "SLK Đẹp Trai",
+    UserInfoSubtitle = "by Belbel1988",
     UserInfoSubtitleColor = Color3.fromRGB(71, 123, 255)
 })
 
