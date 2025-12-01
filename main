@@ -3,20 +3,20 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Grai Hub [Free] | Forsaken |",
-    SubTitle = "Version 1.0",
+    Title = "Grai Hub | Forsaken |",
+    SubTitle = "Version 5.4.8",
     Search = true,
-    Icon = "rbxassetid://128065608232403",
+    Icon = "rbxassetid://111221806665390",
     TabWidth = 160,
     Size = UDim2.fromOffset(480, 360),
     Acrylic = true,
-    Theme = "Light",
+    Theme = "Dark",
     MinimizeKey = Enum.KeyCode.RightAlt,
 
     UserInfo = false,
     UserInfoTop = false,
     UserInfoTitle = game:GetService("Players").LocalPlayer.DisplayName,
-    UserInfoSubtitle = "by Belbel1988",
+    UserInfoSubtitle = "SLK Đẹp Trai",
     UserInfoSubtitleColor = Color3.fromRGB(71, 123, 255)
 })
 
@@ -1868,6 +1868,17 @@ local function getHumanoidAndHRP()
     return hum, hrp
 end
 
+Tabs.Event:AddButton({
+    Title = "TP to Shop",
+    Description = "Teleport đến khu Shop",
+    Callback = function()
+        local _, hrp = getHumanoidAndHRP()
+        if hrp then
+            hrp.CFrame = CFrame.new(-3540.36, -392.73, 231.53)
+        end
+    end,
+})
+
 local allowedModels = {
     ["dumsek"]=true, ["toon dusek"]=true, ["dusek"]=true,
     ["umdum"]=true, ["doothsek"]=true
@@ -1922,6 +1933,13 @@ task.spawn(function()
             end
         end
     end
+end)
+
+Tabs.Event:AddToggle("ESPSukkarsToggle", {
+    Title = "ESP Sukkars",
+    Default = false,
+}):OnChanged(function(state)
+    _G.ESPManager:SetEnabled("Sukkars", state)
 end)
 
 local TargetNames = {"dumsek","toon dusek","umdum","dusek","doothsek"}
@@ -2030,6 +2048,19 @@ task.spawn(function()
         end
     end
 end)
+
+Tabs.Event:AddToggle("AutoFarmSukkars", {
+    Title = "Auto Farm Sukkars",
+    Default = false,
+    Callback = function(state)
+        autoTeleport = state
+        if not state then
+            currentTarget = nil
+            table.clear(visitedModels)
+        end
+    end,
+})
+
 
 -- Tabs.Custom
 
