@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 
 local Window = Fluent:CreateWindow({
-    Title = "Grai Hub | Forsaken |",
+    Title = "Hutao Hub (V3) [Free] | Forsaken |",
     SubTitle = "Version 5.4.8",
     Search = true,
     Icon = "rbxassetid://111221806665390",
@@ -24,6 +24,7 @@ local Tabs = {
     Dev = Window:AddTab({ Title = "About", Icon = "info" }),
     Farm = Window:AddTab({ Title = "Farm", Icon = "box" }),
     Main = Window:AddTab({ Title = "Main", Icon = "home" }),
+    Event = Window:AddTab({ Title = "Event", Icon = "bell" }),
     Custom = Window:AddTab({ Title = "Custom", Icon = "brush" }),
     Player = Window:AddTab({ Title = "Player", Icon = "user" }),
     Visual = Window:AddTab({ Title = "Visual", Icon = "eye" }),
@@ -1894,13 +1895,6 @@ local function isValidModel(model)
     return (part.Position - blockedCenter).Magnitude > blockedRadius
 end
 
-_G.ESPManager:RegisterType("Sukkars", Color3.fromRGB(0,85,255), isValidModel, false)
-
-local oldCreate = _G.ESPManager.Create
-_G.ESPManager.Create = function(self, model, typeName)
-    oldCreate(self, model, typeName)
-    if typeName ~= "Sukkars" then return end
-
     local part = model:FindFirstChild("HumanoidRootPart") or model:FindFirstChildWhichIsA("BasePart")
     if part and not part:FindFirstChild("_TouchedFlag") then
         local flag = Instance.new("BoolValue")
@@ -1933,13 +1927,6 @@ task.spawn(function()
             end
         end
     end
-end)
-
-Tabs.Event:AddToggle("ESPSukkarsToggle", {
-    Title = "ESP Sukkars",
-    Default = false,
-}):OnChanged(function(state)
-    _G.ESPManager:SetEnabled("Sukkars", state)
 end)
 
 local TargetNames = {"dumsek","toon dusek","umdum","dusek","doothsek"}
@@ -2048,19 +2035,6 @@ task.spawn(function()
         end
     end
 end)
-
-Tabs.Event:AddToggle("AutoFarmSukkars", {
-    Title = "Auto Farm Sukkars",
-    Default = false,
-    Callback = function(state)
-        autoTeleport = state
-        if not state then
-            currentTarget = nil
-            table.clear(visitedModels)
-        end
-    end,
-})
-
 
 -- Tabs.Custom
 
